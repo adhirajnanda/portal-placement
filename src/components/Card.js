@@ -22,7 +22,7 @@ function Card() {
           <div className="card-body">
             <h5 className="card-title">Admin</h5>
 
-            <Link to="/login" className="btn btn-primary">
+            <Link to="/alogin" className="btn btn-primary">
               Login
             </Link>
           </div>
@@ -38,7 +38,9 @@ function Card() {
           <div className="card-body">
             <h5 className="card-title">Student</h5>
 
-            <a className="btn btn-primary">Login</a>
+            <Link to="/slogin" className="btn btn-primary">
+              Login
+            </Link>
           </div>
         </div>
 
