@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
   return (
@@ -15,56 +16,32 @@ function Login() {
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
               <form>
-                <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                  <p className="lead fw-normal mb-0 me-3">Sign in </p>
-                  <button
-                    type="button"
-                    className="btn btn-primary btn-floating mx-1"
-                  >
-                    <i className="fab fa-facebook-f"></i>
-                  </button>
+                
 
-                  <button
-                    type="button"
-                    className="btn btn-primary btn-floating mx-1"
-                  >
-                    <i className="fab fa-twitter"></i>
-                  </button>
-
-                  <button
-                    type="button"
-                    className="btn btn-primary btn-floating mx-1"
-                  >
-                    <i className="fab fa-linkedin-in"></i>
-                  </button>
-                </div>
-
-                <div className="divider d-flex align-items-center my-4">
-                  <p className="text-center fw-bold mx-3 mb-0">Or</p>
-                </div>
-
-                <div className="form-outline mb-4">
+                <div className="form-outline mb-4 mt-5">
+                <label className="form-label" for="form3Example3">
+                    Email address
+                  </label>
                   <input
                     type="email"
                     id="form3Example3"
                     className="form-control form-control-lg"
                     placeholder="Enter a valid email address"
                   />
-                  <label className="form-label" for="form3Example3">
-                    Email address
-                  </label>
+                 
                 </div>
 
                 <div className="form-outline mb-3">
+                <label className="form-label" for="form3Example4">
+                    Password
+                  </label>
                   <input
                     type="password"
                     id="form3Example4"
                     className="form-control form-control-lg"
                     placeholder="Enter password"
                   />
-                  <label className="form-label" for="form3Example4">
-                    Password
-                  </label>
+                  
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center">
@@ -94,9 +71,10 @@ function Login() {
                   </button>
                   <p className="small fw-bold mt-2 pt-1 mb-0">
                     Don't have an account?{" "}
-                    <a href="#!" className="link-danger">
-                      Register
-                    </a>
+                 
+                    <Link to="/cregistration" className="link-danger">
+              Register Here
+            </Link>
                   </p>
                 </div>
               </form>

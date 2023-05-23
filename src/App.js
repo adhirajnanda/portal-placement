@@ -2,9 +2,10 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import Login from "./components/Login";
+import CLogin from "./components/CLogin";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
+import Cregistration from "./components/Cregistration";
 
 function App() {
   return (
@@ -13,17 +14,34 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route
           exact
-          path="/login"
+          path="/clogin"
           element={
             <>
               <Navbar />
-              <Login />
+              <CLogin />
               <Footer />
+              
+              
+            </>
+          }
+        />
+
+<Route
+          exact
+          path="/cregistration"
+          element={
+            <>
+              <Navbar />
+              <Cregistration/>
+              <Footer />
+              
+              
             </>
           }
         />
       </Routes>
     </Router>
+    
   );
 }
 

@@ -9,6 +9,7 @@ function Home() {
       <Navbar />
       <Card />
       <Footer />
+      
     </>
   );
 }

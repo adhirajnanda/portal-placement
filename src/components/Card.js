@@ -52,7 +52,7 @@ function Card() {
           <div className="card-body">
             <h5 className="card-title">Company</h5>
 
-            <Link to={"/login"} className="btn btn-primary">
+            <Link to={"/clogin"} className="btn btn-primary">
               Login
             </Link>
           </div>
