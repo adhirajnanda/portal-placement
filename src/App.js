@@ -9,72 +9,141 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Cregistration from "./components/Cregistration";
 import Sregistration from "./components/Sregistration";
+import SDashboard from "./components/SDashboard";
+import SJobapplied from "./components/SJobapplied";
+import CDashboard from "./components/CDashboard";
+import Cjobpost from "./components/Cjobpost";
+import ADashboard from "./components/ADashboard";
+import AStudentdetails from "./components/AStudentdetails";
+import ACompanydetails from "./components/ACompanydetails";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
+      <div>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
 
-        <Route
-          exact
-          path="/alogin"
-          element={
-            <>
-              <Navbar />
-              <ALogin />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          exact
-          path="/clogin"
-          element={
-            <>
-              <Navbar />
-              <CLogin />
-              <Footer />
-            </>
-          }
-        />
+          <Route
+            exact
+            path="/alogin"
+            element={
+              <>
+                <ALogin />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/clogin"
+            element={
+              <>
+                <CLogin />
+              </>
+            }
+          />
 
-        <Route
-          exact
-          path="/slogin"
-          element={
-            <>
-              <Navbar />
-              <SLogin />
-              <Footer />
-            </>
-          }
-        />
+          <Route
+            exact
+            path="/slogin"
+            element={
+              <>
+                <SLogin />
+              </>
+            }
+          />
 
-        <Route
-          exact
-          path="/cregistration"
-          element={
-            <>
-              <Navbar />
-              <Cregistration />
-              <Footer />
-            </>
-          }
-        />
+          <Route
+            exact
+            path="/cregistration"
+            element={
+              <>
+                <Cregistration />
+              </>
+            }
+          />
 
-        <Route
-          exact
-          path="/sregistration"
-          element={
-            <>
-              <Navbar />
-              <Sregistration />
-              <Footer />
-            </>
-          }
-        />
-      </Routes>
+          <Route
+            exact
+            path="/sregistration"
+            element={
+              <>
+                <Sregistration />
+              </>
+            }
+          />
+
+          <Route
+            exact
+            path="/sdashboard"
+            element={
+              <>
+                <SDashboard />
+              </>
+            }
+          />
+
+          <Route
+            exact
+            path="/sjobapplied"
+            element={
+              <>
+                <SJobapplied />
+              </>
+            }
+          />
+
+          <Route
+            exact
+            path="/cdashboard"
+            element={
+              <>
+                <CDashboard />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/cjobpost"
+            element={
+              <>
+                <Cjobpost />
+              </>
+            }
+          />
+
+          <Route
+            exact
+            path="/adashboard"
+            element={
+              <>
+                <ADashboard />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/astudentdetails"
+            element={
+              <>
+                <AStudentdetails />
+              </>
+            }
+          />
+
+          <Route
+            exact
+            path="/acompanydetails"
+            element={
+              <>
+                <ACompanydetails />
+              </>
+            }
+          />
+        </Routes>
+        <Footer />
+      </div>
     </Router>
   );
 }

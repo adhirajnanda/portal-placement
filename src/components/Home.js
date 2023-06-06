@@ -6,10 +6,7 @@ import Footer from "./Footer";
 function Home() {
   return (
     <>
-      <Navbar />
       <Card />
-      <Footer />
-      
     </>
   );
 }
