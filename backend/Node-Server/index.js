@@ -84,6 +84,8 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json()); //middleware to parse the data between server and client
 app.use("/api/students", require("./routes/studentRoute")); //middleware using and routes.
+app.use("/api/company", require("./routes/companyRoute")); //middleware using and routes.
+
 app.use(errorHandler);
 app.use(cors());
 
