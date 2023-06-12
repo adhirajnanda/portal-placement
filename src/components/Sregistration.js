@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function Sregistration() {
+function Sregistration(props) {
   const [form, setForm] = useState({});
 
   const handleForm = (e) => {
@@ -12,8 +12,9 @@ function Sregistration() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:8080/test", {
-      method: "PUT",
+    const response = await fetch("http://localhost:5001/api/students/", {
+      method: "POST",
+
       body: JSON.stringify(form),
       headers: {
         "Content-Type": "application/json",
@@ -21,6 +22,11 @@ function Sregistration() {
     });
     const data = await response.json();
     console.log(data);
+    if (!data.success) {
+      alert("Account Created Successfully", "Success");
+    } else {
+      alert("Invalid Credentials", "danger");
+    }
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -184,18 +190,7 @@ function Sregistration() {
                 name="postgraduation"
               />
             </div>
-            <div class="mb-3">
-              <label for="formFile" class="form-label">
-                Upload Your Picture
-              </label>
-              <input
-                class="form-control"
-                type="file"
-                id="formFile"
-                name="profilepic"
-                onChange={handleForm}
-              />
-            </div>
+
             <div class="mb-3">
               <label for="Password" class="form-label">
                 Choose Password
