@@ -16,6 +16,7 @@ import Cjobpost from "./components/Cjobpost";
 import ADashboard from "./components/ADashboard";
 import AStudentdetails from "./components/AStudentdetails";
 import ACompanydetails from "./components/ACompanydetails";
+import Sjobapply from "./components/Sjobapply";
 
 function App() {
   return (
@@ -141,8 +142,18 @@ function App() {
               </>
             }
           />
+          <Route
+            exact
+            path="/sjobapply"
+            element={
+              <>
+                <Sjobapply />
+              </>
+            }
+          />
         </Routes>
         <Footer />
+        
       </div>
     </Router>
   );
