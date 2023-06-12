@@ -1,5 +1,5 @@
 import React from "react";
-import plogo from "../img/plogo.png";
+import plogo1 from "../img/plogo1.png";
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -25,7 +25,7 @@ function Navbar() {
           >
             <Link to="/">
               <img
-                src={plogo}
+                src={plogo1}
                 alt="Logo"
                 width="65px"
                 height="65px"

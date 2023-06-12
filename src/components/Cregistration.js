@@ -1,7 +1,10 @@
 import React from "react";
 
 function Cregistration() {
+
+
   return (
+    <form>
     <div className="wrapper rounded bg-white ms-3 me-3">
       <div className="h2 mt-4 text-center rf">Registration Form</div>
       <div className="h5 mt-4 text-center">
@@ -25,43 +28,15 @@ function Cregistration() {
             <label>Industry Type</label>
             <input type="text" className="form-control" required />
           </div>
-          <div className="col-md-6 mt-md-0 mt-3">
-            <label>Are You a PCS?*</label>
-            <div className="d-flex align-items-center mt-2">
-              <label className="option">
-                <input type="checkbox" name="checkbox" />
-                Yes
-                <span className="checkmark"></span>
-              </label>
-              <label className="option ms-4">
-                <input type="checkbox" name="checkbox" />
-                No
-                <span className="checkmark"></span>
-              </label>
-            </div>
-          </div>
+          
         </div>
         <div className="row">
-          <div className="col-md-6 mt-md-0 mt-3">
-            <label>Listed with recognized Stock exchange?*</label>
-            <div className="d-flex align-items-center mt-2">
-              <label className="option">
-                <input type="checkbox" name="checkbox" />
-                Yes
-                <span className="checkmark"></span>
-              </label>
-              <label className="option ms-4">
-                <input type="checkbox" name="checkbox" />
-                No
-                <span className="checkmark"></span>
-              </label>
-            </div>
-          </div>
+          
           <div className="form-group shadow-textarea mt-2">
             <label for="exampleFormControlTextarea6">
               Company/Firm Description
             </label>
-            <textarea
+            <textarea 
               className="form-control z-depth-1"
               id="exampleFormControlTextarea6"
               rows="3"
@@ -131,25 +106,12 @@ function Cregistration() {
             <input type="text" className="form-control" required />
           </div>
           <div className="col-md-6 mt-md-0 mt-3">
-            <label>Name (person2)*</label>
-            <input type="text" className="form-control" required />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6 mt-md-0 mt-3">
             <label>Email (person1)*</label>
             <input type="text" className="form-control" required />
           </div>
-          <div className="col-md-6 mt-md-0 mt-3">
-            <label>Email (person2)*</label>
-            <input type="text" className="form-control" required />
-          </div>
         </div>
         <div className="row">
-          <div className="col-md-6 mt-md-0 mt-3">
-            <label>Mobile (person1)*(OTP will be sent on this number)</label>
-            <input type="text" className="form-control" required />
-          </div>
+         
           <div className="col-md-6 mt-md-0 mt-3">
             <label>Mobile (person2)*</label>
             <input type="text" className="form-control" required />
@@ -159,22 +121,19 @@ function Cregistration() {
             <input type="password" className="form-control" required />
             <span>(Minimum 5 characters are required)</span>
           </div>
+
         </div>
-        <br />
-        <p>
-          <b>
-            By clicking Complete Registration, you agree to receive SMS
-            notification for OTP (one time password) from us.
-          </b>{" "}
-        </p>
+        
 
         <div className="text-center">
-          <button type="button" className="btn btn-primary mb-3">
+          <button type="button" className="btn btn-primary mt-3">
             Complete Registration
           </button>
+          
         </div>
       </div>
     </div>
+    </form>
   );
 }
 
