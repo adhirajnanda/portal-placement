@@ -1,9 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Login() {
+  const [form, setForm] = useState({ email: "", password: "" });
+  let navigate = useNavigate();
+
+  const handleForm = (e) => {
+    // console.log(e.target.value, e.target.name);
+
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:5001/api/company/login", {
+      method: "POST",
+
+      body: JSON.stringify(form),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    if (!data.success) {
+      alert("Login Successfully", "Success");
+      navigate("/");
+    } else {
+      alert("Invalid Credentials", "danger");
+    }
+  };
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <section className="vh-100 mt-4">
         <div className="container-fluid h-custom">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -26,6 +57,8 @@ function Login() {
                     id="form3Example3"
                     className="form-control form-control-lg"
                     placeholder="Enter a valid email address"
+                    onChange={handleForm}
+                    name="email"
                   />
                 </div>
 
@@ -38,6 +71,8 @@ function Login() {
                     id="form3Example4"
                     className="form-control form-control-lg"
                     placeholder="Enter password"
+                    onChange={handleForm}
+                    name="password"
                   />
                 </div>
 
@@ -80,7 +115,7 @@ function Login() {
           </div>
         </div>
       </section>
-    </div>
+    </form>
   );
 }
 
