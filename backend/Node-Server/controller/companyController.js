@@ -136,16 +136,17 @@ const loginComp = asyncHandler(async (req, res) => {
   }
 
   const company = await Company.findOne({ email });
-  if (company && (await bcrypt.compare(password, Company.password))) {
+  if (company && (await bcrypt.compare(password, company.password))) {
     const accessToken = jwt.sign(
       {
         company: {
           email: company.email,
           id: company.id,
+          name: company.companyname,
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "1m" }
+      { expiresIn: "5m" }
     );
 
     res.status(200).json({ accessToken });
@@ -160,7 +161,7 @@ const loginComp = asyncHandler(async (req, res) => {
 //access private
 
 const currentComp = asyncHandler(async (req, res) => {
-  res.json({ message: "current user information " });
+  res.json(req.company);
 });
 
 module.exports = {
