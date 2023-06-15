@@ -149,13 +149,19 @@ const loginStud = asyncHandler(async (req, res) => {
         student: {
           email: student.email,
           id: student.id,
+          name: student.firstname + " " + student.lastname,
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "1m" }
+      { expiresIn: "5m" }
     );
 
     res.status(200).json({ accessToken });
+  } else if (!student) {
+    success = false;
+    return res
+      .status(400)
+      .json({ error: "Please login with right credentials" });
   } else {
     res.status(401);
     throw new Error("Email or password is not valid");
@@ -166,8 +172,15 @@ const loginStud = asyncHandler(async (req, res) => {
 //@route POST /api/students/current
 //access private
 
-const currentStud = asyncHandler(async (req, res) => {
-  res.json({ message: "current user information " });
+const currStud = asyncHandler(async (req, res) => {
+  try {
+    studId = req.student.id;
+    const stud = await Student.findById(studId).select("-password");
+    res.send(stud);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server ERROR");
+  }
 });
 
 module.exports = {
@@ -177,5 +190,5 @@ module.exports = {
   updateStudent,
   deleteStudent,
   loginStud,
-  currentStud,
+  currStud,
 };

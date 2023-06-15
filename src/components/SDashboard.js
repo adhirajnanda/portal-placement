@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function SDashboard() {
+  const [authenticated, setauthenticated] = useState(null);
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("authenticated");
+    if (loggedInUser) {
+      setauthenticated(loggedInUser);
+    }
+  }, []);
   return (
     <>
       <h1 className="text-center mt-4 ">Latest Jobs</h1>
@@ -98,13 +106,10 @@ function SDashboard() {
           </div>
 
           <div className="row">
-            
-          
             <div className="col-lg-8 mx-auto col-10 col-md-8 col-lg-6">
               <div className="card mb-4">
                 <div className="card-body">
                   <div className="row">
-                    
                     <div className="col-sm-3">
                       <p className="mb-0">Full Name</p>
                     </div>

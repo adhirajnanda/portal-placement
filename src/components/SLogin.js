@@ -26,6 +26,7 @@ function Login() {
     const data = await response.json();
     console.log(data);
     if (!data.success) {
+      localStorage.setItem("token", data.authtoken);
       alert("Login Successfully", "Success");
       navigate("/");
     } else {
@@ -57,6 +58,7 @@ function Login() {
                     id="form3Example3"
                     className="form-control form-control-lg"
                     placeholder="Enter a valid email address"
+                    value={form.email}
                     onChange={handleForm}
                     name="email"
                   />
@@ -71,6 +73,7 @@ function Login() {
                     id="form3Example4"
                     className="form-control form-control-lg"
                     placeholder="Enter password"
+                    value={form.password}
                     onChange={handleForm}
                     name="password"
                   />
@@ -94,15 +97,14 @@ function Login() {
                 </div>
 
                 <div className="text-center text-lg-start mt-4 pt-2">
-                  <Link to="/sdashboard">
-                    <button
-                      type="button"
-                      className="btn btn-primary btn-lg"
-                      style={{ paddingLeft: 2.5, paddingRight: 2.5 }}
-                    >
-                      Login
-                    </button>
-                  </Link>
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-lg"
+                    style={{ paddingLeft: 2.5, paddingRight: 2.5 }}
+                  >
+                    Login
+                  </button>
+
                   <p className="small fw-bold mt-2 pt-1 mb-0">
                     Don't have an account?{" "}
                     <Link to="/sregistration" className="link-danger">
