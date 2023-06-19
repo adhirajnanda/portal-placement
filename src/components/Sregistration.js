@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Sregistration(props) {
+  let navigate = useNavigate();
   const [form, setForm] = useState({});
 
   const handleForm = (e) => {
@@ -24,6 +26,7 @@ function Sregistration(props) {
     console.log(data);
     if (!data.success) {
       alert("Account Created Successfully", "Success");
+      navigate("/slogin");
     } else {
       alert("Invalid Credentials", "danger");
     }

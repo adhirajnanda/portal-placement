@@ -1,15 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SDashboard() {
-  const [authenticated, setauthenticated] = useState(null);
+  let navigate = useNavigate();
+  const [detail, setDetail] = useState([]);
+
+  const fetchUser = async () => {
+    const response = await fetch("http://localhost:5001/api/students/current", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("studentAccessToken")}`,
+      },
+    });
+
+    const respons = await response.json();
+    setDetail(respons);
+  };
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("authenticated");
-    if (loggedInUser) {
-      setauthenticated(loggedInUser);
+    if (localStorage.getItem("token")) {
+    } else {
+      navigate("/login");
     }
+    fetchUser();
   }, []);
+
+  //const objectArray = Object.entries(detail);
+
+  // console.log(objectArray);
+  console.log(detail);
+
   return (
     <>
       <h1 className="text-center mt-4 ">Latest Jobs</h1>
@@ -106,317 +128,136 @@ function SDashboard() {
           </div>
 
           <div className="row">
-            <div className="col-lg-8 mx-auto col-10 col-md-8 col-lg-6">
-              <div className="card mb-4">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Full Name</p>
+            {[detail].map((student) => (
+              <div className="col-lg-8 mx-auto col-10 col-md-8 col-lg-6">
+                <div className="card mb-4">
+                  <div className="card-body ">
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Full Name</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">
+                          {student.firstname} {student.lastname}
+                        </p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">Johnatan Smith</p>
+
+                    <hr />
+
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Email</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{student.email}</p>
+                      </div>
+                    </div>
+
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Phone</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">(097) 234-5678</p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Mobile</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">
+                          {student.mobilenumber}
+                        </p>
+                      </div>
+                    </div>
+                    <hr />
+
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Address</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">
+                          {student.address1} {student.address2}
+                        </p>
+                      </div>
                     </div>
                   </div>
+                </div>
 
-                  <hr />
+                {/* Education */}
 
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Email</p>
+                <div className="card mb-4  ">
+                  <div className="card-body ">
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">DOB :</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{student.dob}</p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">example@example.com</p>
+
+                    <hr />
+
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">10th(%)</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{student.matric}</p>
+                      </div>
+                    </div>
+
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">12th(%)</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{student.inter}</p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">UG(%)</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{student.graduation}</p>
+                      </div>
+                    </div>
+                    <hr />
+
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">PG(%)</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">
+                          {student.postgraduation}{" "}
+                        </p>
+                      </div>
                     </div>
                   </div>
-
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Phone</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">(097) 234-5678</p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Mobile</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">(098) 765-4321</p>
-                    </div>
-                  </div>
-                  <hr />
-
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Address</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">
-                        Bay Area, San Francisco, CA
-                      </p>
+                </div>
+                <div className="card mb-4 ">
+                  <div className="card-body ">
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <Link to="/sjobapplied">
+                          <p className="mb-0">Job Applied</p>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-              {/* Education */}
-
-              <div className="card mb-4  ">
-                <div className="card-body ">
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">DOB :</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">00-00-0000</p>
-                    </div>
-                  </div>
-
-                  <hr />
-
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">10th</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">example@example.com</p>
-                    </div>
-                  </div>
-
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">12th</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">(097) 234-5678</p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">UG</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">(098) 765-4321</p>
-                    </div>
-                  </div>
-                  <hr />
-
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">PG</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">
-                        Bay Area, San Francisco, CA
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="card mb-4 ">
-                <div className="card-body ">
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <Link to="/sjobapplied">
-                        <p className="mb-0">Job Applied</p>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* <div className="row">
-                <div className="col-md-6">
-                  <div className="card mb-4 mb-md-0">
-                    <div className="card-body">
-                      <p className="mb-4">
-                        <span className="text-primary font-italic me-1">
-                          assigment
-                        </span>{" "}
-                        Project Status
-                      </p>
-                      <p className="mb-1" style={{ fontSize: ".77rem" }}>
-                        Web Design
-                      </p>
-                      <div
-                        className="progress rounded"
-                        style={{ height: "5px" }}
-                      >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "80%" }}
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Website Markup
-                      </p>
-                      <div
-                        className="progress rounded"
-                        style={{ height: "5px" }}
-                      >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "72%" }}
-                          aria-valuenow="72"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        One Page
-                      </p>
-                      <div
-                        className="progress rounded"
-                        style={{ height: "5px" }}
-                      >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "89%" }}
-                          aria-valuenow="89"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Mobile Template
-                      </p>
-                      <div
-                        className="progress rounded"
-                        style={{ height: "5px" }}
-                      >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "55%" }}
-                          aria-valuenow="55"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Backend API
-                      </p>
-                      <div
-                        className="progress rounded mb-2"
-                        style={{ height: "5px" }}
-                      >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "66%" }}
-                          aria-valuenow="66"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="card mb-4 mb-md-0">
-                    <div className="card-body">
-                      <p className="mb-4">
-                        <span className="text-primary font-italic me-1">
-                          assigment
-                        </span>{" "}
-                        Project Status
-                      </p>
-                      <p className="mb-1" style={{ fontSize: ".77rem" }}>
-                        Web Design
-                      </p>
-                      <div
-                        className="progress rounded"
-                        style={{ height: "5px" }}
-                      >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "80%" }}
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Website Markup
-                      </p>
-                      <div
-                        className="progress rounded"
-                        style={{ height: "5px" }}
-                      >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "72%" }}
-                          aria-valuenow="72"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        One Page
-                      </p>
-                      <div
-                        className="progress rounded"
-                        style={{ height: "5px" }}
-                      >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "89%" }}
-                          aria-valuenow="89"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Mobile Template
-                      </p>
-                      <div
-                        className="progress rounded"
-                        style={{ height: "5px" }}
-                      >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "55%" }}
-                          aria-valuenow="55"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Backend API
-                      </p>
-                      <div
-                        className="progress rounded mb-2"
-                        style={{ height: "5px" }}
-                      >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "66%" }}
-                          aria-valuenow="66"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
-            </div>
+            ))}
           </div>
         </div>
       </section>
