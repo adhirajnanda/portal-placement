@@ -23,7 +23,7 @@ function Card() {
             src={adminPhoto}
             className="card-img-top"
             alt="..."
-            style={{ height: "18rem" }}
+            style={{ height: "18rem" }} 
           />
           <div className="card-body">
             <h5 className="card-title">Admin</h5>
