@@ -11,6 +11,7 @@ function Cregistration() {
     //console.log(e.target.value, e.target.name);
 
     setForm({ ...form, [e.target.name]: e.target.value });
+    
   };
 
   const handleSubmit = async (e) => {
@@ -36,7 +37,7 @@ function Cregistration() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="wrapper rounded bg-white ms-3 me-3">
-        <div className="h2 mt-4 text-center rf">Registration Form</div>
+        <div className="h2 mt-4 text-center rf">Registration Form</div>    
         <div className="h5 mt-4 text-center">
           Employers/Recruiters Registration
         </div>
@@ -106,7 +107,7 @@ function Cregistration() {
                 name="website"
               />
             </div>
-            <div className="col-md-6 mt-md-0 mt-3">
+            <div className="col-md-6 mt-md-0 mt-3">  
               <label>Phone Number</label>
               <input
                 type="tel"

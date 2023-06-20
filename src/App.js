@@ -17,6 +17,7 @@ import ADashboard from "./components/ADashboard";
 import AStudentdetails from "./components/AStudentdetails";
 import ACompanydetails from "./components/ACompanydetails";
 import Sjobapply from "./components/Sjobapply";
+import Sapplied from "./components/Sapplied";
 
 function App() {
   return (
@@ -150,9 +151,19 @@ function App() {
                 <Sjobapply />
               </>
             }
+            />
+            <Route
+            exact
+            path="/sapplied"
+            element={
+              <>
+                <Sapplied />
+              </>
+            }
           />
         </Routes>
         <Footer />
+        
         
       </div>
     </Router>
