@@ -1,9 +1,41 @@
 import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Cjobpost() {
+  let navigate = useNavigate();
+
+  const [form, setForm] = useState({});
+
+  const handleForm = (e) => {
+    //console.log(e.target.value, e.target.name);
+
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:5001/api/company/job", {
+      method: "POST",
+
+      body: JSON.stringify(form),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    if (!data.success) {
+      alert("Job Posted Successfully", "Success");
+      navigate("/cjobpost");
+    } else {
+      alert("Invalid Credentials");
+    }
+  };
+
   return (
-    <div>
-      <section className="vh-100 mb-4">
+    <form className="mb-5" onSubmit={handleSubmit}>
+      <section className="vh-90 ">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-xl-9">
@@ -24,6 +56,8 @@ function Cjobpost() {
                       <input
                         type="text"
                         className="form-control form-control-lg"
+                        onChange={handleForm}
+                        name="jobtitle"
                       />
                     </div>
                   </div>
@@ -39,6 +73,8 @@ function Cjobpost() {
                         className="form-control "
                         rows="3"
                         placeholder="Detail of Job"
+                        onChange={handleForm}
+                        name="jobdescription"
                       ></textarea>
                     </div>
                   </div>
@@ -53,6 +89,8 @@ function Cjobpost() {
                       <select
                         class="form-select"
                         aria-label="Default select example"
+                        onChange={handleForm}
+                        name="experience"
                       >
                         <option selected>Select</option>
                         <option value="0">Fresher</option>
@@ -74,6 +112,8 @@ function Cjobpost() {
                         className="form-select"
                         multiple
                         aria-label="form-label "
+                        onChange={handleForm}
+                        name="qualification"
                       >
                         <option selected>Select</option>
                         <option value="1">MCA</option>
@@ -88,6 +128,20 @@ function Cjobpost() {
 
                   <hr className="mx-n3" />
 
+                  <div className="row align-items-center pt-4 pb-3">
+                    <div className="col-md-3 ps-5">
+                      <h6 className="mb-0">GPA (Min. Required)</h6>
+                    </div>
+                    <div className="col-md-9 pe-5">
+                      <input
+                        type="text"
+                        className="form-control form-control-lg"
+                        onChange={handleForm}
+                        name="gpa"
+                      />
+                    </div>
+                  </div>
+
                   <div className="px-4 py-4">
                     <button type="submit" className="btn btn-primary ">
                       Post
@@ -99,7 +153,7 @@ function Cjobpost() {
           </div>
         </div>
       </section>
-    </div>
+    </form>
   );
 }
 

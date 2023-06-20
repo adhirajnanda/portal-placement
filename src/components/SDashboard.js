@@ -5,6 +5,24 @@ import { useNavigate } from "react-router-dom";
 
 function SDashboard() {
   let navigate = useNavigate();
+  const [job, setJob] = useState([]);
+  const fetchJob = async () => {
+    const jresponse = await fetch("http://localhost:5001/api/company/job/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const jrespons = await jresponse.json();
+    setJob(jrespons);
+  };
+  useEffect(() => {
+    fetchJob();
+  }, []);
+
+  console.log(job);
+
   const [detail, setDetail] = useState([]);
 
   const fetchUser = async () => {
@@ -22,7 +40,7 @@ function SDashboard() {
   useEffect(() => {
     if (localStorage.getItem("token")) {
     } else {
-      navigate("/login");
+      navigate("/slogin");
     }
     fetchUser();
   }, []);
@@ -35,25 +53,25 @@ function SDashboard() {
   return (
     <>
       <h1 className="text-center mt-4 ">Latest Jobs</h1>
+
       <div className="ms-3 me-3 mt-4 mb-4 d-flex justify-content-around">
-        <div className="card " style={{ width: "18rem" }}>
-          <div className="card-body">
-            <h5 className="card-title">Accenture</h5>
-            <h6 className="card-subtitle mb-2 text-body-secondary">
-              QA Engineer
-            </h6>
-            <p className="card-text">
-              A full time job and candidate must have having 3+ years of
-              experience in webtechnologies
-            </p>
-            <a href="/" className="card-link">
-              More Details
-            </a>
-            <Link to="/sjobapply" className="card-link">
-              Apply
-            </Link>
+        {job.map((jobs) => (
+          <div className="card " style={{ width: "18rem" }}>
+            <div className="card-body">
+              <h5 className="card-title">Accenture</h5>
+              <h6 className="card-subtitle mb-2 text-body-secondary">
+                {jobs.jobtitle}
+              </h6>
+              <p className="card-text">{jobs.jobdescription}</p>
+              <a href="/" className="card-link">
+                More Details
+              </a>
+              <Link to="/sjobapply" className="card-link">
+                Apply
+              </Link>
+            </div>
           </div>
-        </div>
+        ))}
 
         <div className="card" style={{ width: "18rem" }}>
           <div className="card-body">
@@ -78,12 +96,9 @@ function SDashboard() {
           <div className="card-body">
             <h5 className="card-title">Capegimini</h5>
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              Backend Developer
+              React Developer
             </h6>
-            <p className="card-text">
-              A full time job and candidate must have having 3+ years of
-              experience in webtechnologies
-            </p>
+            <p className="card-text">Frontend Design ,API integration</p>
             <a href="/" className="card-link">
               More Details
             </a>
@@ -206,17 +221,7 @@ function SDashboard() {
 
                     <div className="row">
                       <div className="col-sm-3">
-                        <p className="mb-0">10th(%)</p>
-                      </div>
-                      <div className="col-sm-9">
-                        <p className="text-muted mb-0">{student.matric}</p>
-                      </div>
-                    </div>
-
-                    <hr />
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <p className="mb-0">12th(%)</p>
+                        <p className="mb-0">Intermediate(%)</p>
                       </div>
                       <div className="col-sm-9">
                         <p className="text-muted mb-0">{student.inter}</p>
@@ -225,7 +230,7 @@ function SDashboard() {
                     <hr />
                     <div className="row">
                       <div className="col-sm-3">
-                        <p className="mb-0">UG(%)</p>
+                        <p className="mb-0">Graduation(%)</p>
                       </div>
                       <div className="col-sm-9">
                         <p className="text-muted mb-0">{student.graduation}</p>
@@ -235,12 +240,22 @@ function SDashboard() {
 
                     <div className="row">
                       <div className="col-sm-3">
-                        <p className="mb-0">PG(%)</p>
+                        <p className="mb-0">Post Graduation(%)</p>
                       </div>
                       <div className="col-sm-9">
                         <p className="text-muted mb-0">
                           {student.postgraduation}{" "}
                         </p>
+                      </div>
+                    </div>
+
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">GPA</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{student.gpa}</p>
                       </div>
                     </div>
                   </div>

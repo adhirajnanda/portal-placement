@@ -58,4 +58,32 @@ const companySchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Company", companySchema);
+//Job Schema
+
+const jobSchema = mongoose.Schema({
+  jobtitle: {
+    type: String,
+    required: [true, "Please Enter Job Title"],
+  },
+  jobdescription: {
+    type: String,
+    required: [true, "Please Enter Job Description"],
+  },
+  experience: {
+    type: String,
+    required: [true, "Please Enter Experience"],
+  },
+  qualification: {
+    type: String,
+    required: [true, "Please Qualification"],
+  },
+  gpa: {
+    type: Number,
+    required: [true, "Please Qualification"],
+  },
+});
+
+module.exports = {
+  Company: mongoose.model("Company", companySchema),
+  Job: mongoose.model("Job", jobSchema),
+};

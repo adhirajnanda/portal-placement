@@ -44,10 +44,7 @@ const studentSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Enter Address"],
   },
-  matric: {
-    type: String,
-    required: [true, "Please Enter 10th percentage"],
-  },
+
   inter: {
     type: String,
     required: [true, "Please Enter 12th percentage"],
@@ -58,6 +55,10 @@ const studentSchema = mongoose.Schema({
   },
   postgraduation: {
     type: String,
+  },
+  gpa: {
+    type: String,
+    required: [true, "Please Enter gpa"],
   },
 
   password: {

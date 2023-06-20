@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
-const Company = require("../models/companyModel");
+// const Company = require("../models/companyModel");
+const { Company, Job } = require("../models/companyModel");
 const jwt = require("jsonwebtoken");
 
 //CONTROLLER CONTAINS ALL LOGIC FOR REQ AND RES AND CONNECT TO DB.
@@ -150,6 +151,11 @@ const loginComp = asyncHandler(async (req, res) => {
     );
 
     res.status(200).json({ accessToken });
+  } else if (!company) {
+    success = false;
+    return res
+      .status(400)
+      .json({ error: "Please login with right credentials" });
   } else {
     res.status(401);
     throw new Error("Email or password is not valid");
@@ -161,7 +167,42 @@ const loginComp = asyncHandler(async (req, res) => {
 //access private
 
 const currentComp = asyncHandler(async (req, res) => {
-  res.json(req.company);
+  try {
+    compId = req.company.id;
+    const comp = await Company.findById(compId).select("-password");
+    res.send(comp);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server ERROR");
+  }
+});
+
+//job posting by company
+
+const createJob = asyncHandler(async (req, res) => {
+  console.log(req.body);
+  const { jobtitle, jobdescription, experience, qualification, gpa } = req.body;
+  if (!jobtitle || !jobdescription || !experience || !qualification || !gpa) {
+    res.status(400);
+    throw new Error("All fields are mandatory");
+  }
+
+  const job = await Job.create({
+    jobtitle,
+    jobdescription,
+    experience,
+    qualification,
+    gpa,
+  });
+
+  res.status(201).json(job);
+});
+
+//getting all job posted list
+
+const getJob = asyncHandler(async (req, res) => {
+  const jobs = await Job.find();
+  res.status(200).json(jobs);
 });
 
 module.exports = {
@@ -172,4 +213,6 @@ module.exports = {
   deleteCompany,
   loginComp,
   currentComp,
+  createJob,
+  getJob,
 };
