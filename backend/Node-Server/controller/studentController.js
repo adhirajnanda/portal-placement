@@ -31,9 +31,9 @@ const createStudent = asyncHandler(async (req, res) => {
     male,
     address1,
     address2,
-    matric,
     inter,
     postgraduation,
+    gpa,
     graduation,
 
     password,
@@ -49,10 +49,10 @@ const createStudent = asyncHandler(async (req, res) => {
     !male ||
     !address1 ||
     !address2 ||
-    !matric ||
     !inter ||
     !postgraduation ||
     !graduation ||
+    !gpa ||
     !password
   ) {
     res.status(400);
@@ -77,10 +77,10 @@ const createStudent = asyncHandler(async (req, res) => {
     male,
     address1,
     address2,
-    matric,
     inter,
-    postgraduation,
     graduation,
+    postgraduation,
+    gpa,
 
     password: hashedPassword,
   });

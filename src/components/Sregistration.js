@@ -154,17 +154,7 @@ function Sregistration(props) {
           <h5 className="mt-4">Academic Qualifications</h5>
           <div className="row">
             <div className="col-md-6 mt-md-0 mt-3">
-              <label>10th</label>
-              <input
-                type="text"
-                className="form-control"
-                required
-                onChange={handleForm}
-                name="matric"
-              />
-            </div>
-            <div className="col-md-6 mt-md-0 mt-3">
-              <label>12th</label>
+              <label>Intermediate(%)</label>
               <input
                 type="text"
                 className="form-control"
@@ -174,7 +164,7 @@ function Sregistration(props) {
               />
             </div>
             <div className="col-md-6 mt-md-0 mt-3">
-              <label>Graduation</label>
+              <label>Graduation(%)</label>
               <input
                 type="text"
                 className="form-control"
@@ -184,13 +174,24 @@ function Sregistration(props) {
               />
             </div>
             <div className="col-md-6 mt-md-0 mt-3">
-              <label>Post Graduation</label>
+              <label>Post Graduation(%)</label>
               <input
                 type="text"
                 className="form-control"
                 required
                 onChange={handleForm}
                 name="postgraduation"
+              />
+            </div>
+
+            <div className="col-md-6 mt-md-0 mt-3">
+              <label>GPA (Out of 10)</label>
+              <input
+                type="text"
+                className="form-control"
+                required
+                onChange={handleForm}
+                name="gpa"
               />
             </div>
 

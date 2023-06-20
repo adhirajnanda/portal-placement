@@ -1,7 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CDashboard() {
+  let navigate = useNavigate();
+  const [detail, setDetail] = useState([]);
+
+  const fetchUser = async () => {
+    const response = await fetch("http://localhost:5001/api/company/current", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("companyAccessToken")}`,
+      },
+    });
+
+    const respons = await response.json();
+    setDetail(respons);
+  };
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+    } else {
+      navigate("/clogin");
+    }
+    fetchUser();
+  }, []);
+
+  //const objectArray = Object.entries(detail);
+
+  // console.log(objectArray);
+  console.log(detail);
   return (
     <>
       {/* Company Details */}
@@ -45,99 +74,118 @@ function CDashboard() {
           </div>
 
           <div className="row">
-            <div className="col-lg-12">
-              <div className="card mb-4">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Company</p>
+            {[detail].map((company) => (
+              <div className="col-lg-12">
+                <div className="card mb-4">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Company</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{company.companyname}</p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">Goldman Sachs</p>
-                    </div>
-                  </div>
 
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Industry Type</p>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Industry Type</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">
+                          {company.industrytype}
+                        </p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">IT</p>
-                    </div>
-                  </div>
 
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">CIN No.</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">85696-AB-45</p>
-                    </div>
-                  </div>
+                    <hr />
 
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Website</p>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Description</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{company.description}</p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">
-                        https://www.goldmansachs.com/
-                      </p>
-                    </div>
-                  </div>
 
-                  <hr />
+                    <hr />
 
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Email</p>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">CIN No.</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{company.CIN}</p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">
-                        careersfeedback@ny.email.gs.com
-                      </p>
-                    </div>
-                  </div>
 
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Phone</p>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Website</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{company.website} </p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">(097) 234-5678</p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Mobile</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">(098) 765-4321</p>
-                    </div>
-                  </div>
-                  <hr />
 
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Address</p>
+                    <hr />
+
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Email</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{company.email} </p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">
-                        Bay Area, San Francisco, CA
-                      </p>
+
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Phone</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{company.phone}</p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Mobile</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{company.mobile}</p>
+                      </div>
+                    </div>
+                    <hr />
+
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Country</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{company.country}</p>
+                      </div>
+                    </div>
+                    <hr />
+
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Address</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{company.address} </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Education */}
+                {/* Education */}
 
-              {/* <div className="card mb-4  ">
+                {/* <div className="card mb-4  ">
                 <div className="card-body ">
                   <div className="row">
                     <div className="col-sm-3">
@@ -191,7 +239,7 @@ function CDashboard() {
                   </div>
                 </div>
               </div> */}
-              {/* <div className="card mb-4  ">
+                {/* <div className="card mb-4  ">
                 <div className="card-body ">
                   <div className="row">
                     <div className="col-sm-3">
@@ -202,7 +250,8 @@ function CDashboard() {
                   </div>
                 </div>
               </div> */}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
