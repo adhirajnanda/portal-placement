@@ -7,7 +7,7 @@ function SDashboard() {
   let navigate = useNavigate();
   const [job, setJob] = useState([]);
   const fetchJob = async () => {
-    const jresponse = await fetch("http://localhost:5001/api/company/job/", {
+    const jresponse = await fetch("http://localhost:5001/api/company/job/", {  
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -45,10 +45,10 @@ function SDashboard() {
     fetchUser();
   }, []);
 
-  //const objectArray = Object.entries(detail);
+  //const objectArray = Object.entries(detail);   
 
   // console.log(objectArray);
-  console.log(detail);
+  console.log(detail);  
 
   return (
     <>

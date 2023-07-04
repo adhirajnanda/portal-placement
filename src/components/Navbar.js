@@ -29,18 +29,18 @@ function Navbar() {
                 alt="Logo"
                 width="65px"
                 height="65px"
-                // style={{ textAlign: center }}
+                // style={{ textAlign: center }}  
               />
             </Link>
             <h1 className="title">Placement Portal</h1>
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">  
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <a className="nav-link active" aria-current="page" href="#">  
                   Contact
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="#">   
                   About us
                 </a>
               </li>
