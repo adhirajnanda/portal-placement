@@ -52,10 +52,10 @@ function SDashboard() {
     fetchUser();
   }, []);
 
-  //const objectArray = Object.entries(detail);
+  //const objectArray = Object.entries(detail);   
 
   // console.log(objectArray);
-  console.log(detail);
+  console.log(detail);  
 
   return (
     <>

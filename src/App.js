@@ -18,12 +18,15 @@ import AStudentdetails from "./components/AStudentdetails";
 import ACompanydetails from "./components/ACompanydetails";
 import Sjobapply from "./components/Sjobapply";
 import Sapplied from "./components/Sapplied";
+import Writer from "./components/Writer";
 
-function App() {
+
+function App() {  
   return (
     <Router>
       <div>
         <Navbar />
+        <Writer/>
         <Routes>
           <Route exact path="/" element={<Home />} />
 
@@ -148,7 +151,7 @@ function App() {
             path="/sjobapply"
             element={
               <>
-                <Sjobapply />
+                <Sjobapply /> 
               </>
             }
             />
