@@ -2,19 +2,26 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 function SDashboard() {
   let navigate = useNavigate();
   const [job, setJob] = useState([]);
   const fetchJob = async () => {
-    const jresponse = await fetch("http://localhost:5001/api/company/job/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const jresponse = await fetch(
+      "http://localhost:5001/api/students/get-job",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("studentAccessToken")}`,
+        },
+      }
+    );
 
     const jrespons = await jresponse.json();
+    console.log(jrespons);
     setJob(jrespons);
   };
   useEffect(() => {
@@ -56,7 +63,7 @@ function SDashboard() {
 
       <div className="ms-3 me-3 mt-4 mb-4 d-flex justify-content-around">
         {job.map((jobs) => (
-          <div className="card " style={{ width: "18rem" }}>
+          <div className="card mx-2 " style={{ width: "18rem" }}>
             <div className="card-body">
               <h5 className="card-title">Accenture</h5>
               <h6 className="card-subtitle mb-2 text-body-secondary">
@@ -72,63 +79,9 @@ function SDashboard() {
             </div>
           </div>
         ))}
-
-        <div className="card" style={{ width: "18rem" }}>
-          <div className="card-body">
-            <h5 className="card-title">CodeBucket</h5>
-            <h6 className="card-subtitle mb-2 text-body-secondary">
-              Frontend Developer
-            </h6>
-            <p className="card-text">
-              A full time job and candidate must have having 3+ years of
-              experience in webtechnologies
-            </p>
-            <a href="/" className="card-link">
-              More Details
-            </a>
-            <a href="/" className="card-link">
-              Apply
-            </a>
-          </div>
-        </div>
-
-        <div className="card" style={{ width: "18rem" }}>
-          <div className="card-body">
-            <h5 className="card-title">Capegimini</h5>
-            <h6 className="card-subtitle mb-2 text-body-secondary">
-              React Developer
-            </h6>
-            <p className="card-text">Frontend Design ,API integration</p>
-            <a href="/" className="card-link">
-              More Details
-            </a>
-            <a href="/" className="card-link">
-              Apply
-            </a>
-          </div>
-        </div>
-        <div className="card" style={{ width: "18rem" }}>
-          <div className="card-body">
-            <h5 className="card-title">Delloite</h5>
-            <h6 className="card-subtitle mb-2 text-body-secondary">
-              Associate Developer
-            </h6>
-            <p className="card-text">
-              A full time job and candidate must have having 3+ years of
-              experience in webtechnologies
-            </p>
-            <a href="/" className="card-link">
-              More Details
-            </a>
-            <a href="/" className="card-link">
-              Apply
-            </a>
-          </div>
-        </div>
       </div>
 
       {/* Student Details */}
-
       <section style={{ backgroundColor: "#eee" }}>
         <div className="container py-5 text-center">
           <div className="row">

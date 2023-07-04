@@ -1,6 +1,27 @@
-import React from 'react'
+import React from "react";
+import { useState, useEffect } from "react";
 
 function Sapplied() {
+  const [detail, setDetail] = useState([]);
+
+  const fetchUser = async () => {
+    const response = await fetch(
+      "http://localhost:5001/api/students/jobapply/",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const respons = await response.json();
+    setDetail(respons);
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
     <section className="intro mt-4 mb-4">
       <div className="gradient-custom-1 h-100">
@@ -18,66 +39,18 @@ function Sapplied() {
                         <th scope="col">STATUS</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row" style={{ color: "#666666" }}>
-                          Tiger Nixon
-                        </th>
-                        <td>tnixon12@example.com</td>
-                        <td>6202694217</td>
-                        <td>Pending</td>
-                        
-                      </tr>
-                      <tr>
-                        <th scope="row" style={{ color: "#666666" }}>
-                          Sonya Frost
-                        </th>
-                        <td>sfrost34@example.com</td>
-                        <td>9977755533</td>
-                        <td>Pending</td>
-                      </tr>
-                      <tr>
-                        <th scope="row" style={{ color: "#666666" }}>
-                          Jena Gaines
-                        </th>
-                       
-                        <td>jgaines75@example.com</td>
-                        <td>9430893902</td>
-                        <td>Pending</td>
-                      </tr>
-                      <tr>
-                        <th scope="row" style={{ color: "#666666" }}>
-                          Quinn Flynn
-                        </th>
-                        <td>qflyn09@example.com</td>
-                        <td>9988886876</td>
-                        <td>Pending</td>
-                      </tr>
-                      <tr>
-                        <th scope="row" style={{ color: "#666666" }}>
-                          Charde Marshall
-                        </th>
-                        <td>cmarshall28@example.com</td>
-                        <td>9430587234</td>
-                        <td>Pending</td>
-                      </tr>
-                      <tr>
-                        <th scope="row" style={{ color: "#666666" }}>
-                          Haley Kennedy
-                        </th>
-                        <td>hkennedy63@example.com</td>
-                        <td>9977765555</td>
-                        <td>Pending</td>
-                      </tr>
-                      <tr>
-                        <th scope="row" style={{ color: "#666666" }}>
-                          Tatyana Fitzpatrick
-                        </th>
-                        <td>tfitzpatrick00@example.com</td>
-                        <td>9566878452</td>
-                        <td>Pending</td>
-                      </tr>
-                    </tbody>
+                    {detail.map((student) => (
+                      <tbody>
+                        <tr>
+                          <th scope="row" style={{ color: "#666666" }}>
+                            {student.firstname} {student.lastname}
+                          </th>
+                          <td>{student.email}</td>
+                          <td>{student.mobile}</td>
+                          <td>Pending</td>
+                        </tr>
+                      </tbody>
+                    ))}
                   </table>
                 </div>
               </div>
@@ -86,8 +59,7 @@ function Sapplied() {
         </div>
       </div>
     </section>
-    
-  )
+  );
 }
 
-export default Sapplied
+export default Sapplied;
