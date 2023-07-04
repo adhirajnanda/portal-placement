@@ -21,6 +21,7 @@ router.route("/").post(createCompany);
 
 router.get("/current", validateToken, currentComp);
 
+//get posted job list
 router.get("/job/", getJob);
 
 router.route("/:id").get(getCompany);
@@ -35,6 +36,6 @@ router.post("/login", loginComp);
 
 //job create by company
 
-router.post("/job", createJob);
+router.post("/job", validateToken, createJob);
 
 module.exports = router;

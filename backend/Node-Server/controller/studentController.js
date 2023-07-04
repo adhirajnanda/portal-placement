@@ -1,8 +1,10 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
-const Student = require("../models/studentModel");
+const { Student, Apply } = require("../models/studentModel");
+const { Job } = require("../models/companyModel");
+
 const jwt = require("jsonwebtoken");
-const Stud = require("../models/studentModel");
+// const Stud = require("../models/studentModel");
 
 //CONTROLLER CONTAINS ALL LOGIC FOR REQ AND RES AND CONNECT TO DB.
 //@desc Get all student
@@ -152,8 +154,8 @@ const loginStud = asyncHandler(async (req, res) => {
           name: student.firstname + " " + student.lastname,
         },
       },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "5m" }
+      process.env.ACCESS_TOKEN_SECRET
+      // { expiresIn: "5m" }
     );
 
     res.status(200).json({ accessToken });
@@ -183,6 +185,83 @@ const currStud = asyncHandler(async (req, res) => {
   }
 });
 
+//JOB APPLY
+
+const studentApply = asyncHandler(async (req, res) => {
+  try {
+    const {
+      firstname,
+      lastname,
+      email,
+      yop,
+      gpa,
+      mobile,
+      qualification,
+      experience,
+    } = req.body;
+    console.log(req.body);
+    if (
+      !firstname ||
+      !lastname ||
+      !email ||
+      !yop ||
+      !gpa ||
+      !mobile ||
+      !qualification ||
+      !experience
+    ) {
+      res.status(400);
+      throw new Error("All fields are mandatory");
+    }
+
+    const apply = await Apply.create({
+      firstname,
+      lastname,
+      email,
+      yop,
+      gpa,
+      mobile,
+      qualification,
+      experience,
+      studentId: req.student.id,
+    });
+
+    res.status(201).json(apply);
+  } catch (err) {
+    console.log(err);
+    throw new Error(err);
+  }
+  // console.log(req.student);
+});
+
+//getting all job posted list
+
+const getJobApply = asyncHandler(async (req, res) => {
+  const jobsApply = await Apply.find();
+  res.status(200).json(jobsApply);
+});
+
+const getJob = asyncHandler(async (req, res) => {
+  //fetch student id
+  console.log(req.student);
+  let id = req.student.id;
+
+  // fetch marks and course from student data
+  const student = await Student.findOne({ _id: id });
+
+  // console.log(student);
+  //fetch active job from jobs table
+  const jobs = await Job.find({
+    // experience: { $gte: student.experience },
+    gpa: { $gte: student.gpa },
+    //qualification: student.qualification,
+  });
+
+  console.log(jobs);
+
+  res.status(200).json(jobs);
+});
+
 module.exports = {
   getStudents,
   createStudent,
@@ -191,4 +270,7 @@ module.exports = {
   deleteStudent,
   loginStud,
   currStud,
+  studentApply,
+  getJobApply,
+  getJob,
 };
