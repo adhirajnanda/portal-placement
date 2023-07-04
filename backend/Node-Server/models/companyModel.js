@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
 const companySchema = mongoose.Schema({
   companyname: {
@@ -80,6 +81,10 @@ const jobSchema = mongoose.Schema({
   gpa: {
     type: Number,
     required: [true, "Please Qualification"],
+  },
+  companyId: {
+    type: Schema.Types.ObjectId,
+    ref: "Company",
   },
 });
 

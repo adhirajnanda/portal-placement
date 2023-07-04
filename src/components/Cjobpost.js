@@ -20,6 +20,7 @@ function Cjobpost() {
 
       body: JSON.stringify(form),
       headers: {
+        Authorization: `Bearer ${localStorage.getItem("companyAccessToken")}`,
         "Content-Type": "application/json",
       },
     });
@@ -110,7 +111,6 @@ function Cjobpost() {
                     <div className="col-md-9 pe-5">
                       <select
                         className="form-select"
-                        multiple
                         aria-label="form-label "
                         onChange={handleForm}
                         name="qualification"

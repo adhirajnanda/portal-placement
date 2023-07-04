@@ -146,8 +146,8 @@ const loginComp = asyncHandler(async (req, res) => {
           name: company.companyname,
         },
       },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "5m" }
+      process.env.ACCESS_TOKEN_SECRET
+      // { expiresIn: "5m" }
     );
 
     res.status(200).json({ accessToken });
@@ -180,7 +180,7 @@ const currentComp = asyncHandler(async (req, res) => {
 //job posting by company
 
 const createJob = asyncHandler(async (req, res) => {
-  console.log(req.body);
+  console.log(req.company);
   const { jobtitle, jobdescription, experience, qualification, gpa } = req.body;
   if (!jobtitle || !jobdescription || !experience || !qualification || !gpa) {
     res.status(400);
@@ -193,6 +193,7 @@ const createJob = asyncHandler(async (req, res) => {
     experience,
     qualification,
     gpa,
+    companyId: req.company.id,
   });
 
   res.status(201).json(job);

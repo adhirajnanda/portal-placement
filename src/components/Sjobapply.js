@@ -1,119 +1,187 @@
-import React from 'react'
+import React from "react";
+import { useState } from "react";
 
 const Sjobapply = () => {
+  const [form, setForm] = useState({});
+
+  const handleForm = (e) => {
+    //console.log(e.target.value, e.target.name);
+
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch(
+      "http://localhost:5001/api/students/jobapply",
+      {
+        method: "POST",
+
+        body: JSON.stringify(form),
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("studentAccessToken")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    if (!data.success) {
+      alert(" Successfully Applied", "Success");
+    } else {
+      alert("Invalid Credentials");
+    }
+  };
   return (
-    <section class="vh-100 gradient-custom">
-  <div class="container py-5 h-100">
-    <div class="row justify-content-center align-items-center h-100">
-      <div class="col-12 col-lg-9 col-xl-7">
-        <div class="card shadow-2-strong card-registration" style={{borderRadius: "15px"}}>
-          <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Job Application Form</h3>
-            <form>
+    <form className="vh-95 gradient-custom" onSubmit={handleSubmit}>
+      <div className="container py-5 h-60">
+        <div className="row justify-content-center align-items-center h-100">
+          <div className="col-8 col-lg-7 col-xl-7">
+            <div
+              className="card shadow-2-strong card-registration"
+              style={{ borderRadius: "15px" }}
+            >
+              <div className="card-body p-2 p-md-5">
+                <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
+                  Application Form
+                </h3>
 
-              <div class="row">
-                <div class="col-md-6 mb-4">
-
-                  <div class="form-outline">
-                    <input type="text" id="firstName" class="form-control form-control-lg" />
-                    <label class="form-label" for="firstName">First Name</label>
+                <div className="row">
+                  <div className="col-md-6 mb-4">
+                    <div className="form-outline">
+                      <input
+                        type="text"
+                        id="firstName"
+                        className="form-control form-control-lg"
+                        onChange={handleForm}
+                        name="firstname"
+                      />
+                      <label className="form-label" for="firstName">
+                        First Name
+                      </label>
+                    </div>
                   </div>
-
+                  <div className="col-md-6 mb-4">
+                    <div className="form-outline">
+                      <input
+                        type="text"
+                        id="lastName"
+                        className="form-control form-control-lg"
+                        onChange={handleForm}
+                        name="lastname"
+                      />
+                      <label className="form-label" for="lastName">
+                        Last Name
+                      </label>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-6 mb-4">
 
-                  <div class="form-outline">
-                    <input type="text" id="lastName" class="form-control form-control-lg" />
-                    <label class="form-label" for="lastName">Last Name</label>
+                <div className="row">
+                  <div className="col-md-6 mb-4 pb-2">
+                    <div className="form-outline">
+                      <input
+                        type="email"
+                        id="emailAddress"
+                        className="form-control form-control-lg"
+                        onChange={handleForm}
+                        name="email"
+                      />
+                      <label className="form-label" for="emailAddress">
+                        Email
+                      </label>
+                    </div>
                   </div>
+                  <div className="col-md-6 mb-4 pb-2">
+                    <div className="form-outline">
+                      <input
+                        type="text"
+                        id="yearofpassing"
+                        className="form-control form-control-lg"
+                        onChange={handleForm}
+                        name="yop"
+                      />
+                      <label className="form-label" for="yearofpassing">
+                        Graduation(Year of passing)
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
+                <div className="row">
+                  <div className="col-md-6 mb-4 pb-2">
+                    <div className="form-outline">
+                      <input
+                        type="text"
+                        id="gpa"
+                        className="form-control form-control-lg"
+                        onChange={handleForm}
+                        name="gpa"
+                      />
+                      <label className="form-label" for="emailAddress">
+                        GPA/SGPA
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-md-6 mb-4 pb-2">
+                    <div className="form-outline">
+                      <input
+                        type="tel"
+                        id="phoneNumber"
+                        className="form-control form-control-lg"
+                        onChange={handleForm}
+                        name="mobile"
+                      />
+                      <label className="form-label" for="phoneNumber">
+                        Phone Number
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-12">
+                    <select
+                      className="select form-control-lg"
+                      onChange={handleForm}
+                      name="qualification"
+                    >
+                      <option value="1"></option>
+                      <option value="2">MCA</option>
+                      <option value="3">BCA</option>
+                      <option value="4">B.Tech</option>
+                      <option value="4">B.Sc IT</option>
+                    </select>
+                    <label className="form-label select-label">
+                      Choose Qualification
+                    </label>
+                  </div>
+                  <div className="form-outline mt-4">
+                    <input
+                      type="text"
+                      id="experience"
+                      className="form-control form-control-lg"
+                      onChange={handleForm}
+                      name="experience"
+                    />
+                    <label className="form-label" for="experience">
+                      Experience
+                    </label>
+                  </div>
+                </div>
+
+                <div className="mt-4 pt-2">
+                  <button type="submit" className="btn btn-primary ">
+                    Apply
+                  </button>
                 </div>
               </div>
-
-              <div class="row">
-                <div class="col-md-6 mb-4 d-flex align-items-center">
-
-                  <div class="form-outline datepicker w-100">
-                    <input type="text" class="form-control form-control-lg" id="birthdayDate" />
-                    <label for="birthdayDate" class="form-label">Birthday</label>
-                  </div>
-
-                </div>
-                <div class="col-md-6 mb-4">
-
-                  <h6 class="mb-2 pb-1">Gender: </h6>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                      value="option1" checked />
-                    <label class="form-check-label" for="femaleGender">Female</label>
-                  </div>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                      value="option2" />
-                    <label class="form-check-label" for="maleGender">Male</label>
-                  </div>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
-                      value="option3" />
-                    <label class="form-check-label" for="otherGender">Other</label>
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6 mb-4 pb-2">
-
-                  <div class="form-outline">
-                    <input type="email" id="emailAddress" class="form-control form-control-lg" />
-                    <label class="form-label" for="emailAddress">Email</label>
-                  </div>
-
-                </div>
-                <div class="col-md-6 mb-4 pb-2">
-
-                  <div class="form-outline">
-                    <input type="tel" id="phoneNumber" class="form-control form-control-lg" />
-                    <label class="form-label" for="phoneNumber">Phone Number</label>
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-12">
-
-                  <select class="select form-control-lg">
-                    <option value="1" disabled>Qualification</option>
-                    <option value="2">Mca</option>
-                    <option value="3">Bca</option>
-                    <option value="4">B-tech</option>
-                    <option value="4">Bsc-it</option>
-                  </select>
-                  <label class="form-label select-label">Choose Qualification</label>
-
-                </div>
-                <div class="form-outline mt-4">
-                    <input type="text" id="experience" class="form-control form-control-lg" />
-                    <label class="form-label" for="experience">Experience</label>
-                  </div>
-              </div>
-
-              <div class="mt-4 pt-2">
-                <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
-              </div>
-
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-  )
-}
+    </form>
+  );
+};
 
-export default Sjobapply
+export default Sjobapply;

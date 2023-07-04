@@ -8,6 +8,10 @@ const {
   deleteStudent,
   currStud,
   loginStud,
+  sjobApply,
+  getJobApply,
+  studentApply,
+  getJob,
 } = require("../controller/studentController");
 const validateToken = require("../middleware/validateTokenHandler");
 
@@ -19,6 +23,10 @@ router.route("/").post(createStudent);
 
 router.get("/current", validateToken, currStud);
 
+router.get("/job-apply/", getJobApply);
+
+router.get("/get-job", validateToken, getJob);
+
 router.route("/:id").get(getStudent);
 
 router.route("/:id").put(updateStudent);
@@ -26,5 +34,9 @@ router.route("/:id").put(updateStudent);
 router.route("/:id").delete(deleteStudent);
 
 router.post("/login", loginStud);
+
+//job apply by student
+
+router.post("/jobapply", validateToken, studentApply);
 
 module.exports = router;
