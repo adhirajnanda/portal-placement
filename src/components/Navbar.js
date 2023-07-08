@@ -39,11 +39,13 @@ function Navbar() {
                   Contact
                 </a>
               </li>
+             
               <li className="nav-item">
-                <a className="nav-link" href="#">   
-                  About us
-                </a>
+              <Link className="nav-link" to="/Footer">   
+                  AboutUs
+                </Link>
               </li>
+              
             </ul>
           </div>
         </div>

@@ -1,3 +1,8 @@
+#root {
+  font-family: 'Poppins', sans-serif;
+
+}
+
 .App {
   text-align: center;
 }
@@ -51,4 +56,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+.nav-item:hover {
+  background-color: blue;
+  border-radius: 13px;
 }

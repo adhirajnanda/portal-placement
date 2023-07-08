@@ -10,7 +10,7 @@ function SDashboard() {
   const [job, setJob] = useState([]);
   const fetchJob = async () => {
     const jresponse = await fetch(
-      "http://localhost:5001/api/students/get-job",
+      "http://localhost:5001/api/students/get-job",  
       {
         method: "GET",
         headers: {
