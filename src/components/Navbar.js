@@ -1,5 +1,5 @@
 import React from "react";
-import plogo1 from "../img/plogo1.png";
+import paslogo from "../img/paslogo.png";
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -25,27 +25,28 @@ function Navbar() {
           >
             <Link to="/">
               <img
-                src={plogo1}
+                src={paslogo}
                 alt="Logo"
-                width="65px"
-                height="65px"
-                // style={{ textAlign: center }}  
+                width="125px"
+                height="75px"
+                // style={{ textAlign: center }}
               />
             </Link>
-            <h1 className="title">Placement Portal</h1>
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">  
+            <h1 className="title" id="main-title">
+              Placement Activity System
+            </h1>
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">  
+                <a className="nav-link active" aria-current="page" href="#">
                   Contact
                 </a>
               </li>
-             
+
               <li className="nav-item">
-              <Link className="nav-link" to="/Footer">   
+                <Link className="nav-link" to="/Footer">
                   AboutUs
                 </Link>
               </li>
-              
             </ul>
           </div>
         </div>

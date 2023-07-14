@@ -10,6 +10,7 @@ const {
   currentComp,
   createJob,
   getJob,
+  studentapplied,
 } = require("../controller/companyController");
 const validateToken = require("../middleware/validateTokenHandler");
 
@@ -37,5 +38,9 @@ router.post("/login", loginComp);
 //job create by company
 
 router.post("/job", validateToken, createJob);
+
+//job applied by student
+
+router.get("/student_job_applied/", studentapplied);
 
 module.exports = router;

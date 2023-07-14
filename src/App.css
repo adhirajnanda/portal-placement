@@ -1,6 +1,5 @@
 #root {
-  font-family: 'Poppins', sans-serif;
-
+  font-family: "Poppins", sans-serif;
 }
 
 .App {
@@ -12,7 +11,7 @@
   pointer-events: none;
 }
 .type {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Poppins", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: 800;
   font-size: 40px;
   text-align: center;
@@ -20,12 +19,10 @@
   justify-content: center;
   align-items: center;
   background: rgb(255, 255, 255);
-  color:blue;
-  
+  color: #b991de;
 }
-.background{
-  background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
-  
+.background {
+  background-image: url("https://mdbootstrap.com/img/Photos/Others/images/76.jpg");
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -58,6 +55,6 @@
   }
 }
 .nav-item:hover {
-  background-color: blue;
+  background-color: #daf7a6;
   border-radius: 13px;
 }

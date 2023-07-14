@@ -107,6 +107,10 @@ const jobPostSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "Student",
   },
+  companyId: {
+    type: Schema.Types.ObjectId,
+    ref: "Company",
+  },
 });
 
 module.exports = {
