@@ -10,7 +10,7 @@ function SDashboard() {
   const [job, setJob] = useState([]);
   const fetchJob = async () => {
     const jresponse = await fetch(
-      "http://localhost:5001/api/students/get-job",  
+      "http://localhost:5001/api/students/get-job",
       {
         method: "GET",
         headers: {
@@ -52,10 +52,10 @@ function SDashboard() {
     fetchUser();
   }, []);
 
-  //const objectArray = Object.entries(detail);   
+  //const objectArray = Object.entries(detail);
 
   // console.log(objectArray);
-  console.log(detail);  
+  console.log(detail);
 
   return (
     <>
@@ -65,7 +65,7 @@ function SDashboard() {
         {job.map((jobs) => (
           <div className="card mx-2 " style={{ width: "18rem" }}>
             <div className="card-body">
-              <h5 className="card-title">Accenture</h5>
+              <h5 className="card-title">{jobs.company[0]?.companyname}</h5>
               <h6 className="card-subtitle mb-2 text-body-secondary">
                 {jobs.jobtitle}
               </h6>

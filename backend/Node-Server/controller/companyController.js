@@ -206,6 +206,26 @@ const getJob = asyncHandler(async (req, res) => {
   res.status(200).json(jobs);
 });
 
+//applied by student
+
+const studentapplied = asyncHandler(async (req, res) => {
+  const jobs = await JobApply.aggregate([
+    {
+      $match: {
+        $or: [{ companyId: req.company.id }],
+      },
+    },
+    {
+      $lookup: {
+        from: "students",
+        localField: "studentId",
+        foreignField: "_id",
+        as: "student",
+      },
+    },
+  ]);
+});
+
 module.exports = {
   getCompanies,
   createCompany,
@@ -216,4 +236,5 @@ module.exports = {
   currentComp,
   createJob,
   getJob,
+  studentapplied,
 };

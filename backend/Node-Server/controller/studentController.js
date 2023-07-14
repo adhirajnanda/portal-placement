@@ -251,11 +251,37 @@ const getJob = asyncHandler(async (req, res) => {
 
   // console.log(student);
   //fetch active job from jobs table
-  const jobs = await Job.find({
-    // experience: { $gte: student.experience },
-    gpa: { $gte: student.gpa },
-    //qualification: student.qualification,
-  });
+  const jobs = await Job.aggregate([
+    {
+      $match: {
+        $or: [{ gpa: { $gte: 7 } }],
+      },
+    },
+    {
+      $lookup: {
+        from: "companies",
+        localField: "companyId",
+        foreignField: "_id",
+        as: "company",
+      },
+    },
+  ]);
+
+  // const jobs = await JobApply.aggregate([
+  //   {
+  //     $match: {
+  //       $or: [{ companyId: req.company.id }],
+  //     },
+  //   },
+  //   {
+  //     $lookup: {
+  //       from: "students",
+  //       localField: "studentId",
+  //       foreignField: "_id",
+  //       as: "student",
+  //     },
+  //   },
+  // ]);
 
   console.log(jobs);
 
