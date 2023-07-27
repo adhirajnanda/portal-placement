@@ -2,6 +2,9 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 // const Company = require("../models/companyModel");
 const { Company, Job } = require("../models/companyModel");
+const { Apply } = require("../models/studentModel");
+const mongoose = require("mongoose");
+
 const jwt = require("jsonwebtoken");
 
 //CONTROLLER CONTAINS ALL LOGIC FOR REQ AND RES AND CONNECT TO DB.
@@ -209,10 +212,14 @@ const getJob = asyncHandler(async (req, res) => {
 //applied by student
 
 const studentapplied = asyncHandler(async (req, res) => {
-  const jobs = await JobApply.aggregate([
+  let id = req.company.id;
+  console.log(req.company);
+  // const company = await Company.findOne({ _id: id });
+
+  const jobs = await Apply.aggregate([
     {
       $match: {
-        $or: [{ companyId: req.company.id }],
+        $or: [{ companyId: new mongoose.Types.ObjectId(req.company.id) }],
       },
     },
     {
@@ -223,7 +230,17 @@ const studentapplied = asyncHandler(async (req, res) => {
         as: "student",
       },
     },
+    {
+      $lookup: {
+        from: "companies",
+        localField: "companyId",
+        foreignField: "_id",
+        as: "company",
+      },
+    },
   ]);
+  console.log(jobs);
+  res.status(200).json(jobs);
 });
 
 module.exports = {

@@ -25,11 +25,7 @@ router.get("/current", validateToken, currentComp);
 //get posted job list
 router.get("/job/", getJob);
 
-router.route("/:id").get(getCompany);
-
-router.route("/:id").put(updateCompany);
-
-router.route("/:id").delete(deleteCompany);
+router.get("/student_job_applied", validateToken, studentapplied);
 
 router.post("/login", loginComp);
 
@@ -39,8 +35,12 @@ router.post("/login", loginComp);
 
 router.post("/job", validateToken, createJob);
 
-//job applied by student
+router.route("/:id").get(getCompany);
 
-router.get("/student_job_applied/", studentapplied);
+router.route("/:id").put(updateCompany);
+
+router.route("/:id").delete(deleteCompany);
+
+//job applied by student
 
 module.exports = router;

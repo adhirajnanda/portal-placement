@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 function SDashboard() {
@@ -45,12 +44,37 @@ function SDashboard() {
     setDetail(respons);
   };
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    // console.log(localStorage.getItem("studentAccessToken"));
+    if (localStorage.getItem("studentAccessToken")) {
     } else {
       navigate("/slogin");
     }
     fetchUser();
   }, []);
+
+  const handleSubmit = async (id) => {
+    const response = await fetch(
+      "http://localhost:5001/api/students/jobapply",
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          companyId: id,
+        }),
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("studentAccessToken")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    if (!data.success) {
+      alert(" Successfully Applied", "Success");
+    } else {
+      alert("Invalid Credentials");
+    }
+  };
 
   //const objectArray = Object.entries(detail);
 
@@ -73,9 +97,13 @@ function SDashboard() {
               <a href="/" className="card-link">
                 More Details
               </a>
-              <Link to="/sjobapply" className="card-link">
+              <a
+                href="#"
+                onClick={() => handleSubmit(jobs.company[0]?._id)}
+                className="card-link"
+              >
                 Apply
-              </Link>
+              </a>
             </div>
           </div>
         ))}
