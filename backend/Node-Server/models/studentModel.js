@@ -71,38 +71,6 @@ const studentSchema = mongoose.Schema({
 //Job Apply Schema
 
 const jobPostSchema = mongoose.Schema({
-  firstname: {
-    type: String,
-    required: [true, "Please Enter First Name"],
-  },
-  lastname: {
-    type: String,
-    required: [true, "Please Enter Last Name"],
-  },
-  email: {
-    type: String,
-    required: [true, "Please Enter Email"],
-  },
-  yop: {
-    type: String,
-    required: [true, "Please Enter Year Of Passing"],
-  },
-  gpa: {
-    type: Number,
-    required: [true, "Please Give GPA/SGPA"],
-  },
-  mobile: {
-    type: Number,
-    required: [true, "Please Enter Mobile No"],
-  },
-  qualification: {
-    type: String,
-    required: [true, "Please Enter Qualification"],
-  },
-  experience: {
-    type: Number,
-    required: [true, "Please Qualification"],
-  },
   studentId: {
     type: Schema.Types.ObjectId,
     ref: "Student",

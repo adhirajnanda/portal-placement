@@ -6,11 +6,12 @@ function Sapplied() {
 
   const fetchUser = async () => {
     const response = await fetch(
-      "http://localhost:5001/api/students/jobapply/",
+      "http://localhost:5001/api/company/student_job_applied",
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("companyAccessToken")}`,
         },
       }
     );
@@ -39,14 +40,14 @@ function Sapplied() {
                         <th scope="col">STATUS</th>
                       </tr>
                     </thead>
-                    {detail.map((student) => (
+                    {detail.map((company) => (
                       <tbody>
                         <tr>
                           <th scope="row" style={{ color: "#666666" }}>
-                            {student.firstname} {student.lastname}
+                            {detail.company?.company.firstname}{" "}
                           </th>
-                          <td>{student.email}</td>
-                          <td>{student.mobile}</td>
+                          <td>{company.email}</td>
+                          <td>{company.mobile}</td>
                           <td>Pending</td>
                         </tr>
                       </tbody>

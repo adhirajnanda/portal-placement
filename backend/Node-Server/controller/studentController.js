@@ -2,7 +2,6 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const { Student, Apply } = require("../models/studentModel");
 const { Job } = require("../models/companyModel");
-
 const jwt = require("jsonwebtoken");
 // const Stud = require("../models/studentModel");
 
@@ -189,41 +188,11 @@ const currStud = asyncHandler(async (req, res) => {
 
 const studentApply = asyncHandler(async (req, res) => {
   try {
-    const {
-      firstname,
-      lastname,
-      email,
-      yop,
-      gpa,
-      mobile,
-      qualification,
-      experience,
-    } = req.body;
-    console.log(req.body);
-    if (
-      !firstname ||
-      !lastname ||
-      !email ||
-      !yop ||
-      !gpa ||
-      !mobile ||
-      !qualification ||
-      !experience
-    ) {
-      res.status(400);
-      throw new Error("All fields are mandatory");
-    }
+    const { companyId } = req.body;
 
     const apply = await Apply.create({
-      firstname,
-      lastname,
-      email,
-      yop,
-      gpa,
-      mobile,
-      qualification,
-      experience,
       studentId: req.student.id,
+      companyId,
     });
 
     res.status(201).json(apply);

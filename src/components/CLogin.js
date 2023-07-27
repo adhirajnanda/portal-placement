@@ -5,7 +5,7 @@ import { useState } from "react";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
-  
+
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -48,13 +48,13 @@ function Login() {
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-md-9 col-lg-6 col-xl-5">
               <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                src="https://img.freepik.com/free-vector/man-going-trip-booking-tour-online-guy-sitting-front-computer-table-looking-voyage-summer-vacation_575670-946.jpg"
                 className="img-fluid"
                 alt="Sample image"
               />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <div className="form-outline mb-4 mt-5">
+              <div className="form-outline mb-4 mt-4">
                 <label className="form-label" for="form3Example3">
                   Email address
                 </label>

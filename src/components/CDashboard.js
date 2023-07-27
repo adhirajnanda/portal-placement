@@ -20,7 +20,7 @@ function CDashboard() {
     setDetail(respons);
   };
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("companyAccessToken")) {
     } else {
       navigate("/clogin");
     }
